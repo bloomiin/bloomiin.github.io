@@ -1,6 +1,5 @@
 <html>
-
-<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <link type="text/css" rel="stylesheet" href="./css/font-awesome.css">
 <link type="text/css" rel="stylesheet" href="./css/style.css">
 <link type="text/css" rel="stylesheet" href="./s.css">
@@ -12,12 +11,83 @@
     }
 
     .chatTypeMsg {
-        position: absolute;
+        display: flex;
+        justify-content: space-around;
+        width: 500px;
+    }
+
+    .chatTypeMsg input {
+        width: 80%        
+    }
+    .chatTypeMsg button{
+        width: 20%
+    }
+
+    .chatTypeMsgCnt {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /*position: absolute;
         top: 90%;
-        right: 0%;
+        right: 0%;*/
 
         width: 100%;
-        height: 70px;
+        /*height: 30%;*/
+    }
+    
+    .chatMsgs {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 4px;
+
+        overflow-y: auto;
+        height: 84%;
+    }
+
+    .chatText {
+        display: flex;
+        flex-direction: column;
+        width: 97%;
+        margin-bottom: 6px;
+        padding: 4px;
+    }
+
+    .frndText, .myText {
+        background-color: #5546b7;
+        color: white;
+        display: flex;
+
+        /*width: 57%;*/
+        padding: 4px;
+    }
+
+    .frndText {
+        border-top-right-radius: 9px;
+        border-bottom-right-radius: 9px;
+        border-bottom-left-radius: 9px;
+    }
+
+    .myText {
+        flex-direction: row-reverse;
+        justify-content: end;
+
+        border-top-right-radius: 9px;
+        border-top-left-radius: 9px;
+        border-bottom-left-radius: 9px;
+    }
+
+    .frndText, .myText div {
+        background-color: #5546b7;
+    }
+
+    @media(max-width: 500px) {
+        .chatMsgs {
+            width: 100%;
+        }        
     }
 
 </style>
@@ -32,14 +102,42 @@
         <main>
 
             <div class="feed-container" id="feedContainer">
-                <div class="chatMsgs">
-                    <div class="chatText">Hello</div>
+                <div class="chatMsgs" id="chatMsgs">
+                    <div class="chatText">
+                        <div class="frndText">
+                            <div>Hello</div>
+                        </div>
+                    </div>
+                    <div class="chatText">
+                        <div class="myText">
+                            <div>Hello Dan, how are you doing?</div>
+                        </div>
+                    </div>
                 </div>
+                <div class="chatTypeMsgCnt">
                 <div class="chatTypeMsg">
-                    <input type="text" placeholder="Type your message..." />
-                    <button class="site-btn">Send</button>
+                    <input type="text" id="msg" placeholder="Type your message..." onkeypress="keydown()" />
+                    <button class="site-btn" onclick="sendMsg()">Send</button>
+                </div>
                 </div>
             </div>
 
         </main>
+        <script>
+            const l =console.log
+
+            function keydown(e) {
+                l(e)
+            }
+
+            function sendMsg() {
+                
+                const m = `<div class="chatText">
+                        <div class="frndText">
+                            <div>${msg.value}</div>
+                        </div>
+                    </div>`                
+                chatMsgs.innerHTML = chatMsgs.innerHTML + m
+            }
+        </script>
 </html>
